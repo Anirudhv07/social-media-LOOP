@@ -1,13 +1,10 @@
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
-  Button,
   Avatar,
 } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 interface myDetails{

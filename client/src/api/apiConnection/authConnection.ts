@@ -2,13 +2,13 @@ import apiURL from "../axiosUser";
 
 
 interface SignUpFormValues{
-    firstName:string,
-    lastName:string,
-    userName:string
-    email:string,
-    gender:string,
-    password:string
-    phoneNumber:number
+    firstName?:string,
+    lastName?:string,
+    userName?:string
+    email?:string,
+    gender?:string,
+    password?:string
+    phoneNumber?:string
 }
 interface SignupFormResponse{
     message:string,
@@ -24,8 +24,8 @@ interface LogInFormValues{
 }
 
 interface GoogleSignUpUser{
-    userName:string,
-    email:string
+    userName:string|null,
+    email:string|null
     
 }
 

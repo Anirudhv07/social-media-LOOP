@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import  { useEffect, useState }  from 'react'
 import NavbarHeader from '../../../Components/User/Home/Navbar'
 import TopCard from '../../../Components/User/Profile/TopCard'
 import BottomCard from '../../../Components/User/Profile/BottomCard'
@@ -17,7 +17,7 @@ interface myDetails{
   
 }
 
-function MyProfile() {
+const MyProfile=()=> {
 
   const Details:myDetails={
     email:'',
@@ -42,10 +42,13 @@ function MyProfile() {
 
 
   const myDetails=async()=>{
-    const myProfile=await getMyProfile(userId as unknown as string)
+    const myProfile=await getMyProfile(userId as string)
 
     if(myProfile){
       const details={
+        email:myProfile.email,
+        phone:myProfile.phone,
+        profilePic:myProfile.profilePic,
         userName:myProfile.userName,
         firstName:myProfile.firstName,
         lastName:myProfile.lastName,

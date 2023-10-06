@@ -17,7 +17,6 @@ import lodash from "lodash"
 import {toast} from "react-toastify"
 import { signUp } from "../../../api/apiConnection/authConnection";
 import { setToken,  setUserName,setUserId ,setProfilePic } from "../../../redux/userRedux/slice";
-import { useState } from "react";
 
 
 interface resp{
