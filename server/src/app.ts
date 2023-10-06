@@ -4,6 +4,8 @@ import {Application} from 'express'
 import expressConfig from './frameworks/webserver/express'
 import connectDB from './frameworks/database/connection'
 import serverConfig from './frameworks/webserver/server'
+import routes from './frameworks/webserver/routes'
+
 
 const app:Application=express()
 const server=http.createServer(app)
@@ -13,6 +15,8 @@ connectDB()
 expressConfig(app)
 
 serverConfig(server).startServer()
+
+routes(app)
 
 
 
