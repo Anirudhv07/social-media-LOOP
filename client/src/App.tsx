@@ -3,7 +3,7 @@ import './App.css'
 import UserLogin from './Pages/User/Auth/UserLogin'
 import UserSignUp from './Pages/User/Auth/UserSignUp'
 import MyProfile from './Pages/User/Profile/Profile'
-import Home from './Pages/User/Home/home'
+import Home from './Pages/User/Home/Home'
 import { useSelector } from 'react-redux'
 
 import ErrorPage from './Components/Error/Error'
