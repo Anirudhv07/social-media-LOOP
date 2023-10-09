@@ -6,23 +6,24 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import CreateNewPost from "./Create";
 
-interface myDetails{
-  email:string,
-  phone:string,
-  profilePic:string,
-  userName:string,
-  firstName:string,
-  lastName:string,
-  followers:[],
-  following:[]
+interface myDetails {
+  email: string,
+  phone: string,
+  profilePic: string,
+  userName: string,
+  firstName: string,
+  lastName: string,
+  followers: [],
+  following: []
 }
 
 
-const ProfileCard= ({myData}:{myData:myDetails})=>{
-  
+const ProfileCard = ({ myData }: { myData: myDetails }) => {
 
-  
+
+
   const hrStyle = {
     width: '100%',            // Adjust the width to your desired length
     height: '1.5px',           // Set the height to control the line thickness
@@ -36,11 +37,14 @@ const ProfileCard= ({myData}:{myData:myDetails})=>{
   };
 
 
-   
-  
-  
- 
+
+
+
+
   return (
+    <div className="flex flex-col gap-2 ">
+
+   
     <Card className="mt-6 w-[20rem] flex flex-col items-center justify-between">
       <CardBody className="flex flex-col items-center justify-center text-center">
         <Avatar
@@ -52,9 +56,9 @@ const ProfileCard= ({myData}:{myData:myDetails})=>{
         />
 
         <div >
-          
-          <Typography variant="h5" color="blue-gray"  className="flex flex-row " >
-            {myData.firstName} &nbsp; 
+
+          <Typography variant="h5" color="blue-gray" className="flex flex-row " >
+            {myData.firstName} &nbsp;
             {myData.lastName}
           </Typography>
 
@@ -62,21 +66,26 @@ const ProfileCard= ({myData}:{myData:myDetails})=>{
           <p className="sm smaller-text" style={{ color: 'gray', fontSize: '12px' }}> {myData.userName}</p>
 
         </div>
-        <Typography className="font-semibold py-5" >
+        <Typography className="font-semibold py-5 " style={{
+          background: 'linear-gradient(to right,  #9400D3, #9370DB ,#87CEEB,#0000FF)',
+          WebkitBackgroundClip: 'text',
+          fontFamily: "monospace",
+          color: 'transparent',
+        }}  >
           Explore the world
         </Typography>
         <hr className="mt-5" style={hrStyle} />
 
         <div className="flex flex-row gap-6 pt-3 ">
-          
+
           <div >
             <Typography variant="h6" color="blue-gray" className="mb-1">
               Following
             </Typography>
             <p>23</p>
           </div>
-        <hr  style={vrStyle} />
-       <div></div>
+          <hr style={vrStyle} />
+          <div></div>
           <div >
             <Typography variant="h6" color="blue-gray" className="mb-1">
               Followers
@@ -90,10 +99,15 @@ const ProfileCard= ({myData}:{myData:myDetails})=>{
       </CardBody>
       <CardFooter className="pt-0">
 
-        <Link to={"/myProfile"}>View full Profile
+        <Link to={"/myProfile"} className="text-purple-600">View full Profile
         </Link>
       </CardFooter>
     </Card>
+    <div className="w-[20rem]">
+
+    <CreateNewPost />
+    </div>
+    </div>
   );
 }
 

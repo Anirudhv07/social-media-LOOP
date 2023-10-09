@@ -9,10 +9,16 @@ export const userRepositoryInterface=(repository:ReturnType<userDBRepository>)=>
         return await repository.getUserByUserId(userId)
     }
 
+    const changeProPic=async(imgURL:string,userId:string)=>{
+        return await repository.updateProPic(imgURL,userId)
+    }
+
     return{
-        getByUserId
+        getByUserId,
+        changeProPic
     }
 
 }
+
 
 export type userDBInterface=typeof userRepositoryInterface

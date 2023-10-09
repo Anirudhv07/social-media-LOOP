@@ -4,6 +4,7 @@ import TopCard from '../../../Components/User/Profile/TopCard'
 import BottomCard from '../../../Components/User/Profile/BottomCard'
 import { getMyProfile } from '../../../api/apiConnection/homeConnection'
 import { useSelector } from 'react-redux'
+import { getAllPost } from '../../../api/apiConnection/postConnection'
 
 interface myDetails{
   email:string,
@@ -18,6 +19,9 @@ interface myDetails{
 }
 
 const MyProfile=()=> {
+
+  const [allPosts,setAllPosts]=useState([])
+  
 
   const Details:myDetails={
     email:'',
@@ -38,8 +42,16 @@ const MyProfile=()=> {
 
   useEffect(()=>{
     myDetails()
+    allPost()
   },[])
 
+
+  const allPost=async()=>{
+    const allmyPost=await getAllPost(userId)
+    setAllPosts(allmyPost)
+
+    
+  }
 
   const myDetails=async()=>{
     const myProfile=await getMyProfile(userId as string)
@@ -64,10 +76,10 @@ const MyProfile=()=> {
   }
   return (
     <div >
-        
+      
         <NavbarHeader />
         <TopCard myData={myData}/>
-        <BottomCard />
+        <BottomCard allPosts={allPosts}/>
     </div>
   )
 }

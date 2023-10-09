@@ -1,18 +1,21 @@
 import {
-    Card,
-    Typography,
-    List,
-    ListItem,
-    ListItemPrefix,
-    ListItemSuffix,
-    Chip,
-    Avatar,
-  } from "@material-tailwind/react";
-   
-   function RightSideBar() {
-    
-    return (
-      <Card className="h-[calc(100vh-10rem)] w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+  Chip,
+  Avatar,
+} from "@material-tailwind/react";
+
+
+function RightSideBar() {
+
+  return (
+    <div>
+
+      <Card className="h-[calc(100vh-20rem)] w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray">
             People May Know You
@@ -39,8 +42,10 @@ import {
           </div>
         </List>
       </Card>
-    );
-  }
+    </div>
+
+  );
+}
 
 
-  export default RightSideBar
+export default RightSideBar

@@ -55,6 +55,10 @@ const userSlice = createSlice({
             state.userName=action.payload
             localStorage.setItem("userName", action.payload);
         },
+        setProPic:(state,action)=>{
+            state.userProPic=action.payload
+            localStorage.setItem('userProPic',action.payload)
+        },
         setLogout:(state)=>{
             state.token=""
             state.userName=""
@@ -69,6 +73,6 @@ const userSlice = createSlice({
     }
 })
 
-export const {setToken,setUserId,setProfilePic,setUserName,setLogout}=userSlice.actions
+export const {setToken,setUserId,setProfilePic,setUserName,setLogout,setProPic}=userSlice.actions
 
 export default userSlice.reducer

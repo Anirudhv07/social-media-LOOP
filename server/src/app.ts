@@ -5,6 +5,7 @@ import expressConfig from './frameworks/webserver/express'
 import connectDB from './frameworks/database/connection'
 import serverConfig from './frameworks/webserver/server'
 import routes from './frameworks/webserver/routes'
+import cloudinary from './frameworks/webserver/middleware/cloudinary'
 
 
 const app:Application=express()
@@ -14,9 +15,12 @@ connectDB()
 
 expressConfig(app)
 
-serverConfig(server).startServer()
 
 routes(app)
+
+cloudinary.config()
+
+serverConfig(server).startServer()
 
 
 

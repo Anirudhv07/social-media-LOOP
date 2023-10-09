@@ -108,8 +108,8 @@ function UserLogin() {
           toast.success(signUpUser?.message)
         } else {
 
+          toast.error(signUpUser?.message)
         }
-        toast.error(signUpUser?.message)
 
 
       }

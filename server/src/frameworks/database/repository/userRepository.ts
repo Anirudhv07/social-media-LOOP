@@ -9,8 +9,13 @@ export const userRepository=()=>{
         return user
     }
 
+    const updateProPic=async(imgURL:string,userId:string)=>{
+        return await User.updateOne({_id:userId},{$set:{profilePic:imgURL}})
+    }
+
 return{
-    getUserByUserId
+    getUserByUserId,
+    updateProPic
 }
 }
 export type userDBRepository=typeof userRepository
