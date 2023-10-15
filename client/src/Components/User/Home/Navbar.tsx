@@ -26,7 +26,7 @@ function NavbarHeader() {
   }, []);
 
   const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ">
+    <ul className=" mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ">
       <div className="relative flex w-full gap-2 md:w-max ">
         <Input
           type="search"
@@ -47,9 +47,9 @@ function NavbarHeader() {
 
   return (
 
-    <div className="flex flex-row justify-center">
+    <div className=" flex flex-row justify-center">
 
-    <Navbar className=" fixed z-20 top-0 h-max  py-2 px-4 lg:px-8 lg:py-4 ">
+    <Navbar className=" fixed z-30 top-0 h-max  py-2 px-4 lg:px-8 lg:py-4 ">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"

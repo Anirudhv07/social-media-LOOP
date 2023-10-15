@@ -2,36 +2,103 @@ import apiURL from "../axiosUser";
 
 
 
-export const getMyProfile=async(userId:string)=>{
-    try{
-        const response= await apiURL.post('/user/myProfile',{userId})
+export const getMyProfile = async (userId: string) => {
+    try {
+        const response = await apiURL.post('/user/myProfile', { userId })
         return response?.data
-        
-        
-    }catch(error:any){
+
+
+    } catch (error: any) {
         console.log(error);
+
+    }
+}
+
+export const changeProPic = async (profilePic: File, userId: string) => {
+    try {
+
+        const form = new FormData
+        form.append('profilePic', profilePic)
+        form.append('userId', userId)
+
+
+
+        const response = await apiURL.post('/user/updateProPic', form)
+        return response.data
+
+    } catch (error: any) {
+        console.log(error);
+
+    }
+}
+
+export const getAllUsers=async()=>{
+
+    try{
+        const response=await apiURL.get('/user/allUsers')
+        return response.data
+    }catch(err:any){
+        console.log(err);
         
     }
 }
 
-export const changeProPic=async(profilePic:File,userId:string)=>{
+export const followUnfollowUser=async(followerId:string,userId:string)=>{
     try{
-    console.log(profilePic,'imggg');
-    
-    const form=new FormData
-    form.append('profilePic',profilePic)
-    form.append('userId',userId)
 
+        if(followerId===userId){
+            return
+        }else{
 
-    console.log(form,"imgFileeee");
-    
-    const response=await apiURL.post('/user/updateProPic',form)
-    console.log(response,'prpppp');
-    return response.data
-    
-}catch(error:any){
-    console.log(error);
-    
+            const data={
+                followerId,userId
+            }
+            
+            
+            const response=await apiURL.post('user/followUnfollow',data)
+            return response.data
+        }
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
 }
+
+export const followingList=async(userId:string)=>{
+    try{
+        
+        const response=await apiURL.post('user/followingList',{userId})
+        return response.data
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
 }
 
+export const followerList=async(userId:string)=>{
+    try{
+        
+        const response=await apiURL.post('user/followerList',{userId})
+        return response.data
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
+}
+
+export const followersPost=async(userId:string)=>{
+    try{
+        
+        const response=await apiURL.post('user/followersPost',{userId})
+        
+        
+        return response.data
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
+}

@@ -14,6 +14,21 @@ router.post('/myProfile',controller.myProfileDetails)
 
 router.post('/updateProPic',uploadProfilePic,controller.updateProPic)
 
+router.get('/allUsers',controller.getAllUser)
+
+router.post('/followUnfollow',controller.followUnfollow)
+
+router.post('/followingList',controller.followingList)
+
+router.post('/followerList',controller.followerList)
+
+router.post('/followersPost',controller.followersPost)
+
+
+
+
+
+
 
 
 

@@ -12,7 +12,7 @@ import {
     Button,
   } from "@material-tailwind/react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -20,17 +20,15 @@ import { Link } from "react-router-dom";
  function AvatarDropdown() {
     const dispatch=useDispatch()
     const navigate=useNavigate()
+
+    const {userId,userProPic}=useSelector((store:any)=>store.user)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
  
     const signOut=()=>{
         dispatch(setLogout())
         toast.success('Signout Successful')
         navigate('/')
-
-
-    
     }
-   
     return (
       <Menu>
         <MenuHandler>
@@ -46,7 +44,7 @@ import { Link } from "react-router-dom";
             size="sm"
             alt="tania andrew"
             className="border border-gray-900 p-0.5"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            src={process.env.PROFILE_PIC_URL+userProPic}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -73,11 +71,9 @@ import { Link } from "react-router-dom";
                 d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <Link to={"/myProfile"}>
-            <Typography variant="small" className="font-normal">
+            <Typography variant="small" onClick={()=>{navigate(`/myProfile/${userId}`)}} className="font-normal">
               My Profile
             </Typography>
-            </Link>
           </MenuItem>
           <MenuItem className="flex items-center gap-2">
             <svg

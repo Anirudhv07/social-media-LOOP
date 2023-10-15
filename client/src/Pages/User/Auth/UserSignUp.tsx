@@ -16,14 +16,14 @@ import { Link, useNavigate } from "react-router-dom";
 import lodash from "lodash"
 import {toast} from "react-toastify"
 import { signUp } from "../../../api/apiConnection/authConnection";
-import { setToken,  setUserName,setUserId ,setProfilePic } from "../../../redux/userRedux/slice";
+import { setToken,  setUserName,setUserId ,setProfilePic,setFirstName,setLastName } from "../../../redux/userRedux/slice";
 
 
 interface resp{
   status?:string,
   message?:string,
   token?:string,
-  user?:{userName:string,_id:string,profilePic:string}
+  user?:{userName:string,firstName:string,lastName:string,_id:string,profilePic:string}
 }
 
 function UserSignUp() {
@@ -88,6 +88,8 @@ function UserSignUp() {
         if (response?.token) {
           
           dispatch(setUserName(response?.user?.userName))
+          dispatch(setFirstName(response?.user?.firstName))
+          dispatch(setLastName(response?.user?.lastName))
           dispatch(setUserId(response?.user?._id))
           dispatch(setProfilePic(response?.user?.profilePic))
           dispatch(setToken(response?.token))

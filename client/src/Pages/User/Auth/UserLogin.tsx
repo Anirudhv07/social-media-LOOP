@@ -14,13 +14,13 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { setToken, setUserName,setUserId ,setProfilePic} from "../../../redux/userRedux/slice";
+import { setToken, setUserName,setUserId ,setProfilePic, setFirstName, setLastName} from "../../../redux/userRedux/slice";
 import { toast } from "react-toastify";
 
 interface response {
   status?: string,
   message?: string,
-  user?: { userName: string, _id: string, profilePic: string }
+  user?: { userName: string,firstName:string,lastName:string,_id: string, profilePic: string }
   token?: string,
 }
 
@@ -52,6 +52,8 @@ function UserLogin() {
         if (response?.token) {
           
           dispatch(setToken(response?.token))
+          dispatch(setFirstName(response?.user?.firstName))
+          dispatch(setLastName(response?.user?.lastName))
           dispatch(setUserName(response?.user?.userName))
           dispatch(setUserId(response?.user?._id))
           dispatch(setProfilePic(response?.user?.profilePic))

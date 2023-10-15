@@ -19,7 +19,7 @@ function App() {
         <Routes>
             <Route path='/' element={reduxToken ? <Home /> : <UserLogin />} />
             <Route path='/signup' element={<UserSignUp />} />
-            <Route path='/myProfile' element={<MyProfile />} />
+            <Route path='/myProfile/:id' element={<MyProfile />} />
             <Route path='/*' element={<ErrorPage />}/>
         </Routes>
       </BrowserRouter>

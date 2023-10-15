@@ -13,10 +13,30 @@ export const myProfie = async (userId: string, repository: ReturnType<userDBInte
 
 
 export const updateProfilePic = async (userId: string, imgURL: any, repository: ReturnType<userDBInterface>) => {
-    const updateProPic = await repository.changeProPic(imgURL,userId)
-    console.log(updateProPic,'resopooooooo');
+    return await repository.changeProPic(imgURL,userId)
     
-
-
-    return updateProPic
+     
 }
+
+export const allUsers=async(repository:ReturnType<userDBInterface>)=>{
+    return await repository.getAllUser()
+     
+}
+
+export const followUnfollowUser=async(followerId:string,userId:string,repository:ReturnType<userDBInterface>)=>{
+    return await repository.followUnfollow(followerId,userId)
+
+}
+
+export const myFollowingList=async(userId:string,repository:ReturnType<userDBInterface>)=>{
+    return await repository.followingList(userId)
+}
+
+export const myFollowerList=async(userId:string,repository:ReturnType<userDBInterface>)=>{
+    return await repository.followerList(userId)
+}
+
+export const myFollowersPost=async(userId:string,repository:ReturnType<userDBInterface>)=>{
+    return await repository.followersPost(userId)
+}
+

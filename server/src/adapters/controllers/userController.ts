@@ -2,8 +2,7 @@ import asyncHandler from "express-async-handler"
 import { Request, Response } from "express"
 import { userDBInterface } from "../../application/repositoryInterface/userRepositoryInterface"
 import { userDBRepository } from "../../frameworks/database/repository/userRepository"
-import { myProfie } from "../../application/useCases/user"
-import { updateProfilePic } from "../../application/useCases/user"
+import { myProfie,updateProfilePic,allUsers,followUnfollowUser,myFollowingList,myFollowerList,myFollowersPost } from "../../application/useCases/user"
 
 const userController=(
     userRepository:userDBRepository,
@@ -25,7 +24,6 @@ const userController=(
             const imageURL=req.file?.path.split('/image-')[1]
             const userId=req.body.userId
             
-            console.log(req.file,imageURL,'iemmmmmmmmmmmm');
             
             await updateProfilePic(userId,imageURL,repository).then(()=>{
                 res.status(200).json({ status: 'Success',data: imageURL })
@@ -38,11 +36,56 @@ const userController=(
     })
 
 
-    
+    const getAllUser=asyncHandler(async(req:Request,res:Response)=>{
+        const response=await allUsers(repository)
+        res.json(response)
+        
+    })
+
+    const followUnfollow=asyncHandler(async(req:Request,res:Response)=>{
+        const followerId=req.body.followerId
+        const userId=req.body.userId
+        
+        const response=await followUnfollowUser(followerId,userId,repository)
+
+        res.json(response)
+        
+        
+        
+    })
+
+    const followingList=async(req:Request,res:Response)=>{
+        const userId=req.body.userId
+        
+        const response=await myFollowingList(userId,repository)
+
+        res.json(response)
+    }
+
+    const followerList=async(req:Request,res:Response)=>{
+        const userId=req.body.userId
+        
+        const response=await myFollowerList(userId,repository)
+
+        res.json(response)
+    }
+
+    const followersPost=async(req:Request,res:Response)=>{
+        const userId=req.body.userId
+        
+        const response=await myFollowersPost(userId,repository)
+
+        res.json(response)
+    }
  
 return{
     myProfileDetails,
-    updateProPic
+    updateProPic,
+    getAllUser,
+    followUnfollow,
+    followingList,
+    followerList,
+    followersPost
   
 }
 }

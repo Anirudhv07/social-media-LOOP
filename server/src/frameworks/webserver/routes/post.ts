@@ -13,6 +13,15 @@ const postRouter=()=>{
 router.post('/postImg',uploadPostImg,controller.postImage)
 
 router.post('/allPost',controller.getAllUserPost)
+
+router.post('/likePost',controller.likePost)
+
+router.post('/addComment',controller.addComment)
+
+router.post('/getAllComments',controller.allComment)
+
+
+
     
 
 return router

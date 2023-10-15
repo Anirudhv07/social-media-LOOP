@@ -14,15 +14,21 @@ import { postImg } from "../../../api/apiConnection/postConnection";
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+
 interface Dialog{
   handleOpen:()=>void,
   open:boolean
 }
  
+
  const DialogBox:React.FC<Dialog> = ({handleOpen,open})=> {
 
   const [hideFooter,setHideFooter]=useState(false)
 
+  const navigate=useNavigate()
   const userId=useSelector((state:any)=>state.user.userId)
    
   const [imgFile,setImgFile]=useState<File|null>(null)
@@ -44,6 +50,14 @@ interface Dialog{
       event?.preventDefault()
     
       const response=await postImg(values,userId)
+       if(response===true){
+        navigate(`/myProfile/${userId}`)
+        toast.success('Image Posted Successfully')
+      }else{
+        navigate('/myProfile')
+        toast.success('Error Occured')
+
+      }
     }
   })
 

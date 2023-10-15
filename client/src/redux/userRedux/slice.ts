@@ -14,6 +14,20 @@ const getUserNamelocal=()=>{
     }
 }
 
+const getFirstNamelocal=()=>{
+    const firstName = localStorage.getItem("firstName")
+    if(firstName){
+        return firstName
+    }
+}
+
+const getLastNamelocal=()=>{
+    const lastName = localStorage.getItem("lastName")
+    if(lastName){
+        return lastName
+    }
+}
+
 const getUserId=()=>{
     const userId=localStorage.getItem("userId")
     if(userId){
@@ -31,7 +45,11 @@ const getUserProPic=()=>{
 const initialState={
     token:getTokenLocal(),
     userName:getUserNamelocal(),
-    // response:[],
+    firstName:getFirstNamelocal(),
+    lastName:getLastNamelocal(),
+    followerCount:0,
+    followingCount:0,
+    suggestedPeople:[],
     userId:getUserId(),
     userProPic:getUserProPic()
 }
@@ -55,15 +73,36 @@ const userSlice = createSlice({
             state.userName=action.payload
             localStorage.setItem("userName", action.payload);
         },
+        setFirstName:(state,action)=>{
+            state.firstName=action.payload
+            localStorage.setItem("firstName", action.payload);
+        },
+        setLastName:(state,action)=>{
+            state.lastName=action.payload
+            localStorage.setItem("lastName", action.payload);
+        },
         setProPic:(state,action)=>{
             state.userProPic=action.payload
             localStorage.setItem('userProPic',action.payload)
         },
+        setFollowerCount:(state,action)=>{
+            state.followerCount=action.payload
+        },
+        setFollowingCount:(state,action)=>{
+            state.followingCount=action.payload
+        },
+        setSuggestedPeople:(state,action)=>{
+            state.suggestedPeople=action.payload
+        },
         setLogout:(state)=>{
             state.token=""
             state.userName=""
+            state.firstName=""
+            state.lastName=""
             state.userProPic=""
             state.userId=""
+            state.followerCount=0
+            state.followingCount=0
             localStorage.removeItem("token")
             localStorage.removeItem("userId")
             localStorage.removeItem("userName")
@@ -73,6 +112,8 @@ const userSlice = createSlice({
     }
 })
 
-export const {setToken,setUserId,setProfilePic,setUserName,setLogout,setProPic}=userSlice.actions
+
+
+export const {setToken,setUserId,setProfilePic,setLastName,setFirstName,setUserName,setLogout,setProPic,setFollowerCount,setFollowingCount,setSuggestedPeople}=userSlice.actions
 
 export default userSlice.reducer
