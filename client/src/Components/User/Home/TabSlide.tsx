@@ -12,7 +12,6 @@ import SinglePost from "../Profile/SinglePost";
 
 function TabSlide({ post }: { post: any }) {
 
-  console.log(post, 'posttme');
 
 
 

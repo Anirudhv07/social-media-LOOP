@@ -13,8 +13,8 @@ export const postRepositoryInterface=(repository:ReturnType<postDBRepository>)=>
         const response= await repository.likeFunction(userId,postId)
         return response  
     }
-    const addComment=async(userId:string,postId:string,comment:string)=>{
-        return await repository.commentFunction(userId,postId,comment)  
+    const addComment=async(userId:string,postId:string,comment:string,replyCommentId:string,replyToUser:string,replyToUserName:string,userProPic:string)=>{
+        return await repository.commentFunction(userId,postId,comment,replyCommentId,replyToUser,replyToUserName,userProPic)  
     }
     const allComments=async(postId:string)=>{
         

@@ -346,6 +346,11 @@ export const userRepository=()=>{
               userDetails: 1,
             },
         },
+        {
+          $sort: {
+            "posts.createdAt": -1, // Sort in ascending order by createdAt field
+          },
+        },
       ])
     }
 

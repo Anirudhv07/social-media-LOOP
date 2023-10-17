@@ -45,12 +45,36 @@ export const postRepository =()=>{
         
     }
 
-    const commentFunction=async(commentedUser:string,postId:string,comment:string)=>{
+    const commentFunction=async(commentedUser:string,postId:string,comment:string,replyCommentId:string,replyToUser:string,replyToUserName:string,userProPic:string)=>{
+      if(replyCommentId){
+        const comments= comment.replace(`@${replyToUserName}`,``)
+        const replyComment={
+          comment:comments,
+          commentedUser,
+          replyToUser,
+          replyToUserName,
+          userProPic,
+          postId,
+          liked:[],
+          reports:[],
+          listed:true,
+          createdAt:new Date()
+        }
+ console.log(replyComment,'replyyyy');
+ 
+        const response=await Comment.updateOne({_id:replyCommentId},{$push:{reply:replyComment}})
+        if(response){
+          return replyComment
+        }
+
+      }else{
+
         const newComment={
             commentedUser,postId,comment
         }
         const addComment=new Comment(newComment)
         return await addComment.save()
+      }
     }
 
     const getAllComments=async(userPostId:string)=>{

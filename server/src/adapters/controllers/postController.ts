@@ -42,11 +42,24 @@ const postController=(postRepositoryInterface:postDBInterface,postRepository:pos
     const addComment=async(req:Request,res:Response)=>{
         const userId=req.body.userId
         const postId=req.body.postId    
-        const comment=req.body.comment  
+        const comment=req.body.commentText 
+        const replyCommentId=req.body.commentID
+        const replyToUser=req.body.replyToUser
+        const replyToUserName=req.body.replyToUserName
+        const userProPic=req.body.userProPic
         
-        const response=await commentFuncion(userId,postId,comment,repository) 
-        res.json(response) 
+        
+        const response:any=await commentFuncion(userId,postId,comment,replyCommentId,replyToUser,replyToUserName,userProPic,repository) 
+        if(response?.replyToUser){
+            console.log(response,'repo');
+            
 
+            res.json({comment:false,response})
+        }else{
+            res.json({comment:true,response})
+            
+        }
+    
         
     }
 

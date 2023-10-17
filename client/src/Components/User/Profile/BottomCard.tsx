@@ -24,13 +24,7 @@ interface post{
 
 function BottomCard({ allPosts }: { allPosts: [] }) {
 
-    allPosts.map((allPost: any) => {
-        console.log(
-            process.env.POST_PIC_URL + allPost.imgVideoURL
-
-        )
-
-    })
+   
 
     return (
 

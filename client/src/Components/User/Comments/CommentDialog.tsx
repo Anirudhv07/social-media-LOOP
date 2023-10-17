@@ -28,53 +28,88 @@ interface Dialog {
 }
 const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comments,setComments }) => {
     
-    const textAreaRef=useRef<HTMLTextAreaElement | null>(null)
+    const textAreaRef=useRef<HTMLInputElement | null>(null)
 
 
-    const [comment,setComment]=useState('')
     const [commentText,setCommentText]=useState('')
     const [replyToUser,setReplyToUser]=useState('')
+    const [replyToUserName,setReplyToUserName]=useState('')
     const [commentID,setCommentID]=useState('')
+    
+
 
     const {userId,userProPic,firstName,lastName,userName}=useSelector((state:any)=>state.user)
-    console.log(userProPic,firstName,lastName,'rdetai;');
     
-    const focusTextAreaReply=(commentedUser:string,commentId:string)=>{
+    const focusTextAreaReply=(commentedUserId:string,commentedUser:string,commentId:string)=>{
+       
+        
         if(textAreaRef.current){
             textAreaRef.current.focus()
-            setCommentText(`@${commentedUser}`)
-            setReplyToUser(commentedUser)
+            setCommentText(`@${commentedUser} `)
+            setReplyToUser(commentedUserId)
+            setReplyToUserName(commentedUser)
+
             setCommentID(commentId)
             
         }
     }
 
     const addComment=async(postId:any)=>{
+        
         event?.preventDefault()
-        if(comment.trim()!==""){
+        if(commentText.trim()!==""){
+
             
-            const response=await addNewComment(postId,userId,comment)
-        console.log(response,'add comment');
+         const response=await addNewComment(postId,userId,commentText,commentID,replyToUser,replyToUserName,userProPic)
+        console.log(response,'commentss');
         
-        
-        if (response) {
-            response.userDetails = {  // Create a new userDetails object
+    
+        if (response.comment==true) {
+           const result=response.response
+            result.userDetails = {  // Create a new userDetails object
                 profilePic: userProPic,
                 firstName: firstName,
                 lastName: lastName,
                 userName:userName
             };
-            console.log(response, 'add comment updated');
-        
-            setComment("");
-            setComments((prev: any) => [...prev, response]);
-            console.log(comments, 'comments');
-        }
-        
+            console.log('coming heree');
             
-            
+        
+            setCommentText("");
+            setComments((prev: any) => [...prev, result]);
+        
         }
+        else{
+            console.log(response,'z');
+            
+            const replyData=comments.map((eachComment:any)=>{
+              if(eachComment._id===commentID){
+           const result=response.response
 
+                result.userDetails = {  // Create a new userDetails object
+                    profilePic: userProPic,
+                    firstName: firstName,
+                    lastName: lastName,
+                    userName:userName
+                };
+                return{
+                    ...eachComment,reply:[...eachComment.reply,result]
+                }
+              }
+              return eachComment
+            })
+            setComments(replyData)
+        }
+        setCommentText("");
+
+        
+        
+            
+            
+        }
+        if(textAreaRef?.current){
+            textAreaRef.current.focus()
+        }
     }
 
     
@@ -155,8 +190,9 @@ const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comment
                                     <Input
                                         type="comment"
                                         label="Add Comment"
-                                       value={comment}
-                                       onChange={(e)=>setComment(e.target.value)}
+                                        ref={textAreaRef}
+                                       value={commentText}
+                                       onChange={(e)=>setCommentText(e.target.value)}
 
                                         className="pr-20"
                                         containerProps={{

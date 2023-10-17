@@ -11,7 +11,6 @@ interface post{
     report:[]
 }
 function SinglePost({allPost}:{allPost:post}) {
-    console.log(allPost,'alll');
     
   return (
     <div

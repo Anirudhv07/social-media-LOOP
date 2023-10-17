@@ -51,11 +51,10 @@ export const likeFunction=async(userId:string,postId:string)=>{
 }
 
 
-export const addNewComment=async(postId:string,userId:string,comment:string)=>{
+export const addNewComment=async(postId:string,userId:string,commentText:string,commentID:string,replyToUser:string,replyToUserName:string,userProPic:string)=>{
     const datas={
-        postId,userId,comment
+        postId,userId,commentText,commentID,replyToUser,replyToUserName,userProPic
     }
-    console.log(datas,'hhii');
     
     
     const response=await apiURL.post('/post/addComment',datas)

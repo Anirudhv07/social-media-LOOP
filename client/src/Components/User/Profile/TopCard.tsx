@@ -4,6 +4,7 @@ import {
   CardBody,
   Typography,
   Avatar,
+  Button,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import DialogBox from "./DialogBox";
@@ -27,14 +28,17 @@ interface myDetails {
 
 interface topCard{
   myData:myDetails,
-  allPosts:[]
+  allPosts:[],
+  followStat:boolean
 }
-const TopCard:React.FC<topCard>=({ myData ,allPosts})=> {
+const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat})=> {
 
 
 
 
-  const { userProPic, userId } = useSelector((store: any) => store.user)
+  const { userProPic, userId,suggestedPeople } = useSelector((store: any) => store.user)
+
+  
 
 
   const [open, setOpen] = useState(false)
@@ -136,7 +140,17 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts})=> {
             <p>{myData.followers.length}</p>
           </div>
 
-        </div>
+
+          
+
+        </div >
+        <div className="mt-5">
+
+          {myData.userId === userId ?(<Button >Edit Profile</Button>):(followStat==true?(<Button>Unfollow</Button>):(<Button>Follow</Button>))}
+</div>
+        
+          
+      
 
       </CardBody>
     </Card>

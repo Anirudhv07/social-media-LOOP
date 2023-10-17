@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { followUnfollowUser } from "../../../api/apiConnection/homeConnection";
 import { setFollowingCount, setSuggestedPeople } from "../../../redux/userRedux/slice";
+import { useNavigate } from "react-router-dom";
 
 interface follow {
 
@@ -32,6 +33,8 @@ interface Dialog {
 }
 const FollowDialog: React.FC<Dialog> = ({ handleOpen, open, followList, isFollow }) => {
 
+    const navigate=useNavigate()
+
   const dispatch=useDispatch()
   const followingCount=useSelector((state:any)=>state.user.followingCount)
     
@@ -41,13 +44,19 @@ const FollowDialog: React.FC<Dialog> = ({ handleOpen, open, followList, isFollow
 
     const followUnfollow = async (followerId: string,currfollowerList:any) => {
  
-        console.log(currfollowerList);
+       
         
         const response = await followUnfollowUser(followerId, userId)
         dispatch(setSuggestedPeople([...suggestedPeople,currfollowerList]))
         dispatch(setFollowingCount(followingCount-1))
         handleOpen()        
     }
+
+    const viewProfile=(profileId:string)=>{
+        
+        navigate(`/myProfile/${profileId}`)
+    }
+    
 
 
 
@@ -61,10 +70,10 @@ const FollowDialog: React.FC<Dialog> = ({ handleOpen, open, followList, isFollow
                         {followList.map((followList: any) => {
                             if(isFollow==='Following'){
                                 return(
-                                    <div className=" flex flex-row justify-between p-3">
+                                    <div className=" flex flex-row justify-between p-3"  onClick={()=> navigate(`/myProfile/${followList.userId}`)}>
                                     <div className="flex flex-row items-center ">
 
-                                        <ListItemPrefix className="cursor-pointer" key={followList._id}>
+                                        <ListItemPrefix className="cursor-pointer" key={followList._id} >
                                             <Avatar variant="circular"  alt="" src={process.env.PROFILE_PIC_URL + followList.profilePic} />
                                         </ListItemPrefix>
                                         <div className="cursor-pointer">

@@ -6,6 +6,7 @@ import { getMyProfile } from '../../../api/apiConnection/homeConnection'
 import { useSelector } from 'react-redux'
 import { getAllPost } from '../../../api/apiConnection/postConnection'
 import { useParams } from 'react-router-dom'
+import { boolean } from 'yup'
 
 interface myDetails{
   email:string,
@@ -39,6 +40,7 @@ const MyProfile=()=> {
   const userId =useSelector((state:any)=>state.user.userId)
 
   const [myData,setMyData]=useState<myDetails>(Details)
+  const [followStat,setFollowStat]=useState(boolean)
 
 
 
@@ -72,6 +74,10 @@ const MyProfile=()=> {
       }
 
 
+     const followStatus= await myProfile.following.includes(id)
+     console.log(details,followStat,'followstat');
+     
+     setFollowStat(followStatus)
       setMyData(details)
 
     }
@@ -81,7 +87,7 @@ const MyProfile=()=> {
     <div >
       
         <NavbarHeader />
-        <TopCard myData={myData} allPosts={allPosts}/>
+        <TopCard myData={myData} allPosts={allPosts} followStat={followStat}/>
         <BottomCard allPosts={allPosts}/>
     </div>
   )
