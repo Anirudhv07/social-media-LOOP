@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import DialogBox from "./DialogBox";
 import dotenv from 'dotenv'
 import { useSelector } from "react-redux";
+import EditProfile from "./EditProfileDialog";
+import { followUnfollowUser } from "../../../api/apiConnection/homeConnection";
 
 
 
@@ -29,20 +31,30 @@ interface myDetails {
 interface topCard{
   myData:myDetails,
   allPosts:[],
-  followStat:boolean
+  followStat:boolean,
+  setFollowStat:any
 }
-const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat})=> {
+const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat,setFollowStat})=> {
 
-
-
-
-  const { userProPic, userId,suggestedPeople } = useSelector((store: any) => store.user)
 
   
 
 
+  const { userProPic, userId,userName,firstName,lastName ,bio,email} = useSelector((store: any) => store.user)
+
+  const [openEditProfile, setOpenEditProfile] = useState(false);
+ 
+  const handleOpenEditProfle = () => setOpenEditProfile(!openEditProfile);
+
+
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
+
+  const followUnfollow=async(followerId:string)=>{
+    const response = await followUnfollowUser(followerId, userId)
+    setFollowStat(!followStat)
+
+  }
 
   return (
     <Card
@@ -105,15 +117,15 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat})=> {
         <DialogBox handleOpen={handleOpen} open={open} />
 
         <Typography variant="h5" className="mt-4 text-white">
-          {myData.firstName} &nbsp;
-          {myData.lastName}
+          {firstName} &nbsp;
+          {lastName}
         </Typography>
-        <p>{myData.userName}</p>
+        <p>{userName}</p>
         <Typography className="font-sans py-5  text-white" style={{
           fontFamily: "monospace",
         }}  >
           <span>--  </span>
-          Explore the world
+          {bio}
           <span>  --</span>
 
         </Typography>
@@ -144,9 +156,10 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat})=> {
           
 
         </div >
-        <div className="mt-5">
+        <div className="mt-5" >
 
-          {myData.userId === userId ?(<Button >Edit Profile</Button>):(followStat==true?(<Button>Unfollow</Button>):(<Button>Follow</Button>))}
+          {myData.userId === userId ?<Button onClick={handleOpenEditProfle}>Edit Profile</Button>:(followStat===true?(<Button onClick={()=>followUnfollow(myData.userId)}>Unfollow</Button>):(<Button onClick={()=>followUnfollow(myData.userId)}>Follow</Button>))}
+          <EditProfile handleOpenEditProfle={handleOpenEditProfle} openEditProfile={openEditProfile} myData={myData}/>
 </div>
         
           

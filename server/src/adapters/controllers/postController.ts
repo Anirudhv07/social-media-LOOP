@@ -4,7 +4,7 @@ import { Request, Response } from "express"
 
 import { postDBInterface } from "../../application/repositoryInterface/postRepositoryInterface"
 import { postDBRepository } from "../../frameworks/database/repository/postRepository"
-import { postData,allUserPost,likeFunctions, commentFuncion, getAllComment } from "../../application/useCases/post"
+import { postData,allUserPost,likeFunctions, commentFuncion, getAllComment, deleteThisComment } from "../../application/useCases/post"
 
 
 const postController=(postRepositoryInterface:postDBInterface,postRepository:postDBRepository)=>{
@@ -51,7 +51,6 @@ const postController=(postRepositoryInterface:postDBInterface,postRepository:pos
         
         const response:any=await commentFuncion(userId,postId,comment,replyCommentId,replyToUser,replyToUserName,userProPic,repository) 
         if(response?.replyToUser){
-            console.log(response,'repo');
             
 
             res.json({comment:false,response})
@@ -65,10 +64,17 @@ const postController=(postRepositoryInterface:postDBInterface,postRepository:pos
 
     const allComment=async(req:Request,res:Response)=>{
         const postId=req.body.singlePostId  
+        
         const response=await getAllComment(postId,repository)
-        console.log(response,'klpiu');
         
         res.json(response)
+        
+    }
+    const deleteComment=async(req:Request,res:Response)=>{
+        const commentId=req.body.commentId  
+        const response=await deleteThisComment(commentId,repository)
+        
+        res.status(200).json({ status: 'Success' ,data:response})
         
     }
     return{
@@ -76,7 +82,8 @@ const postController=(postRepositoryInterface:postDBInterface,postRepository:pos
         getAllUserPost,
         likePost,
         addComment,
-        allComment
+        allComment,
+        deleteComment
     }
 }
 

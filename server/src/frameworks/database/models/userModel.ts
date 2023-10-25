@@ -29,6 +29,7 @@ const userSchema= new Schema(
         },
         bio:{
             type:String,
+            default:''
         },
         gender:{
             type:String

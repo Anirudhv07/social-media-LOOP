@@ -24,6 +24,9 @@ router.post('/followerList',controller.followerList)
 
 router.post('/followersPost',controller.followersPost)
 
+router.post('/editProfile',controller.editProfile)
+
+
 
 
 

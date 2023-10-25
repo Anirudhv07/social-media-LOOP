@@ -68,6 +68,14 @@ export const getAllComment=async(singlePostId:string)=>{
     return response.data
 }
 
+export const deleteThisComment=async(commentId:string)=>{
+    
+    
+    const response=await apiURL.post('/post/deleteComment',{commentId})
+    return response.data
+    
+}
+
 
 
 

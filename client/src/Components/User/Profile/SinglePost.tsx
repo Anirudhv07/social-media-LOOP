@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { getAllComment } from '../../../api/apiConnection/postConnection'
+import CommentSection from '../Comments/CommentDialog'
 
 
 interface post{
+    _id:string,
     createdAt:string
     description:string
     imgVideoURL:string
@@ -10,12 +13,24 @@ interface post{
     updatedAt:string
     report:[]
 }
-function SinglePost({allPost}:{allPost:post}) {
+function SinglePost({singlePost}:{singlePost:post}) {
+  const [comments, setComments] = useState([])
+  const [open, setOpen] = useState(false);
+
+
+
+  const handleOpen = async () => {
+    
+    const response = await getAllComment(singlePost._id)
+
+    setComments(response)
+    setOpen(!open);
+  }
     
   return (
     <div
   className="w-full h-full relative overflow-hidden"
-  style={{ width: '100%', height: '100%' }}
+  style={{ width: '100%', height: '100%' }} onClick={handleOpen}
   onMouseOver={(e) => {
     const img = e.currentTarget.querySelector('img') as HTMLImageElement | null;
     if (img) {
@@ -29,9 +44,11 @@ function SinglePost({allPost}:{allPost:post}) {
     }
   }}
 >
+<CommentSection handleOpen={handleOpen} open={open} singlePost={singlePost} comments={comments} setComments={setComments} />
+
   <img
     className="w-full h-full object-cover"
-    src={process.env.POST_PIC_URL + allPost.imgVideoURL}
+    src={process.env.POST_PIC_URL + singlePost.imgVideoURL}
     alt="Posted Image"
     style={{
       transition: 'transform 0.2s',
@@ -45,6 +62,7 @@ function SinglePost({allPost}:{allPost:post}) {
     {/* Add content for the hover effect, like text or icons */}
   </div>
 </div>
+
 
   )
 }

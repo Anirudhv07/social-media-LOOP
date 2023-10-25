@@ -35,6 +35,20 @@ const getUserId=()=>{
     }
 }
 
+const getUserEmail=()=>{
+    const userEmail=localStorage.getItem("email")
+    if(userEmail){
+        return userEmail
+    }
+}
+
+const getUserBio=()=>{
+    const userBio=localStorage.getItem("userBio")
+    if(userBio){
+        return userBio
+    }
+}
+
 const getUserProPic=()=>{
     const userProPic=localStorage.getItem("userProPic")
     if(userProPic){
@@ -49,6 +63,8 @@ const initialState={
     lastName:getLastNamelocal(),
     followerCount:0,
     followingCount:0,
+    bio:getUserBio(),
+    email:getUserEmail(),
     suggestedPeople:[],
     userId:getUserId(),
     userProPic:getUserProPic()
@@ -85,6 +101,14 @@ const userSlice = createSlice({
             state.userProPic=action.payload
             localStorage.setItem('userProPic',action.payload)
         },
+        setUserBio:(state,action)=>{
+            state.bio=action.payload
+            localStorage.setItem('userBio',action.payload)
+        },
+        setUserEmail:(state,action)=>{
+            state.email=action.payload
+            localStorage.setItem('email',action.payload)
+        },
         setFollowerCount:(state,action)=>{
             state.followerCount=action.payload
         },
@@ -94,6 +118,7 @@ const userSlice = createSlice({
         setSuggestedPeople:(state,action)=>{
             state.suggestedPeople=action.payload
         },
+        
         setLogout:(state)=>{
             state.token=""
             state.userName=""
@@ -101,12 +126,17 @@ const userSlice = createSlice({
             state.lastName=""
             state.userProPic=""
             state.userId=""
+            state.bio=""
+            state.email=""
             state.followerCount=0
             state.followingCount=0
             localStorage.removeItem("token")
             localStorage.removeItem("userId")
             localStorage.removeItem("userName")
             localStorage.removeItem("userProPic")
+            localStorage.removeItem("userBio")
+            localStorage.removeItem("email")
+
 
         }
     }
@@ -114,6 +144,6 @@ const userSlice = createSlice({
 
 
 
-export const {setToken,setUserId,setProfilePic,setLastName,setFirstName,setUserName,setLogout,setProPic,setFollowerCount,setFollowingCount,setSuggestedPeople}=userSlice.actions
+export const {setToken,setUserId,setProfilePic,setUserBio,setLastName,setFirstName,setUserName,setLogout,setProPic,setFollowerCount,setUserEmail,setFollowingCount,setSuggestedPeople}=userSlice.actions
 
 export default userSlice.reducer

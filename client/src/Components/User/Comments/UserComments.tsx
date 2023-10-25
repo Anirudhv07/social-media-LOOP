@@ -2,6 +2,7 @@ import { Avatar, Typography } from '@material-tailwind/react'
 import moment from 'moment'
 import React from 'react'
 import ReplyComment from './ReplyComment'
+import DeleteComment from './DeleteDialog'
 
 
 
@@ -26,11 +27,17 @@ interface comments {
 interface singleCommentContainer {
     singleComment: comments,
     focusTextAreaReply: (commentedUserId: string, commentedUser: string, commentId: string) => void
-}
+    setComments:any,
+    comments:any
+}   
 
-const UserComments: React.FC<singleCommentContainer> = ({ singleComment, focusTextAreaReply }) => {
+const UserComments: React.FC<singleCommentContainer> = ({ singleComment, focusTextAreaReply, setComments, comments }) => {
+   
+    const commentId=singleComment._id
     
-console.log(singleComment,'djeuuuuu');
+    const [open, setOpen] = React.useState(false);
+ 
+    const handleOpen = () => setOpen(!open);
 
     const handleReplyClick = () => {
         focusTextAreaReply(singleComment.commentedUser, singleComment.userDetails.userName, singleComment._id)
@@ -76,9 +83,12 @@ console.log(singleComment,'djeuuuuu');
                             <Typography className="text-sm cursor-pointer" onClick={handleReplyClick}>
                                 Reply
                             </Typography>
+                            <Typography className="text-sm cursor-pointer" onClick={handleOpen}> 
+                                Delete
+                            <DeleteComment  handleOpen={handleOpen} open={open} commentId={commentId} comments={comments} setComments={setComments}/>
+                            </Typography>
 
                         </div>
-
                     </div>
 
                     {singleComment?.reply ? singleComment?.reply.map((reply: any) => (

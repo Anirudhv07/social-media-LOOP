@@ -1,3 +1,4 @@
+import { editUserProfile } from "../../../application/useCases/user"
 import User from "../models/userModel"
 import mongoose from "mongoose"
 
@@ -354,6 +355,29 @@ export const userRepository=()=>{
       ])
     }
 
+
+    const editUserProfile=async(userId:string,values:{firstName:string,
+      lastName:string,
+      userName:string,
+      bio:string,
+      email:string})=>{
+        const response=await User.updateOne({_id:userId},{$set:{
+          firstName:values.firstName,
+          lastName:values.lastName,
+          userName:values.userName,
+          email:values.email,
+          bio:values.bio
+        }})
+
+        
+        if(response.modifiedCount===1){
+          return values
+        }else{
+          return 'Error'
+        }
+        
+      }
+
 return{
     getUserByUserId,
     updateProPic,
@@ -361,7 +385,8 @@ return{
     followUnfollowUser,
     myFollowingList,
     myFollowerList,
-    myFollowersPost
+    myFollowersPost,
+    editUserProfile
 }
 }
-export type userDBRepository=typeof userRepository
+export type   userDBRepository=typeof userRepository

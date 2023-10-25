@@ -56,6 +56,8 @@ export const followUnfollowUser=async(followerId:string,userId:string)=>{
             
             
             const response=await apiURL.post('user/followUnfollow',data)
+         
+            
             return response.data
         }
         
@@ -95,6 +97,22 @@ export const followersPost=async(userId:string)=>{
         const response=await apiURL.post('user/followersPost',{userId})
         
         
+        return response.data
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
+}
+
+export const editProfile=async(values:{},userId:string)=>{
+    try{
+        const data={
+            values,userId
+        }
+        
+        
+        const response=await apiURL.post('user/editProfile',data)
         return response.data
         
     }catch(err:any){

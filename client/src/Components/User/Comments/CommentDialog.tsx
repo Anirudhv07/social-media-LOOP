@@ -27,6 +27,10 @@ interface Dialog {
     setComments:any
 }
 const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comments,setComments }) => {
+
+
+    console.log(comments,'commentsssss');
+    
     
     const textAreaRef=useRef<HTMLInputElement | null>(null)
 
@@ -61,7 +65,6 @@ const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comment
 
             
          const response=await addNewComment(postId,userId,commentText,commentID,replyToUser,replyToUserName,userProPic)
-        console.log(response,'commentss');
         
     
         if (response.comment==true) {
@@ -72,7 +75,6 @@ const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comment
                 lastName: lastName,
                 userName:userName
             };
-            console.log('coming heree');
             
         
             setCommentText("");
@@ -80,7 +82,6 @@ const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comment
         
         }
         else{
-            console.log(response,'z');
             
             const replyData=comments.map((eachComment:any)=>{
               if(eachComment._id===commentID){
@@ -177,7 +178,7 @@ const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comment
                             {comments.map((singleComment:any)=>{
                                 return(
 
-                                    <UserComments singleComment={singleComment} focusTextAreaReply={focusTextAreaReply}/>
+                                    <UserComments singleComment={singleComment} focusTextAreaReply={focusTextAreaReply} setComments={setComments} comments={comments}/>
                                 )
                             })}
 

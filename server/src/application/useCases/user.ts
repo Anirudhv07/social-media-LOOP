@@ -40,3 +40,11 @@ export const myFollowersPost=async(userId:string,repository:ReturnType<userDBInt
     return await repository.followersPost(userId)
 }
 
+export const editUserProfile=async(userId:string,values:{firstName:string,
+    lastName:string,
+    userName:string,
+    bio:string,
+    email:string},repository:ReturnType<userDBInterface>)=>{
+    return await repository.editProfile(userId,values)
+}
+

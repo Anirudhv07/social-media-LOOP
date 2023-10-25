@@ -52,10 +52,10 @@ const FollowDialog: React.FC<Dialog> = ({ handleOpen, open, followList, isFollow
         handleOpen()        
     }
 
-    const viewProfile=(profileId:string)=>{
+    // const viewProfile=(profileId:string)=>{
         
-        navigate(`/myProfile/${profileId}`)
-    }
+    //     navigate(`/myProfile/${profileId}`)
+    // }
     
 
 
@@ -70,8 +70,8 @@ const FollowDialog: React.FC<Dialog> = ({ handleOpen, open, followList, isFollow
                         {followList.map((followList: any) => {
                             if(isFollow==='Following'){
                                 return(
-                                    <div className=" flex flex-row justify-between p-3"  onClick={()=> navigate(`/myProfile/${followList.userId}`)}>
-                                    <div className="flex flex-row items-center ">
+                                    <div className=" flex flex-row justify-between p-3"  >
+                                    <div className="flex flex-row items-center " onClick={()=> navigate(`/myProfile/${followList.userId}`)}>
 
                                         <ListItemPrefix className="cursor-pointer" key={followList._id} >
                                             <Avatar variant="circular"  alt="" src={process.env.PROFILE_PIC_URL + followList.profilePic} />

@@ -20,12 +20,17 @@ export const postRepositoryInterface=(repository:ReturnType<postDBRepository>)=>
         
         return await repository.getAllComments(postId)  
     }
+    const deleteComment=async(commentId:string)=>{
+        
+        return await repository.deleteThisComment(commentId)  
+    }
     return{
         userPostData,
         getAllUserPost,
         likePost,
         addComment,
-        allComments
+        allComments,
+        deleteComment
     }
 }
 

@@ -22,10 +22,7 @@ interface myDetails{
 
 const MyProfile=()=> {
   const {id}=useParams()
-
-  const [allPosts,setAllPosts]=useState([])
   
-
   const Details:myDetails={
     email:'',
     phone:'',
@@ -37,10 +34,13 @@ const MyProfile=()=> {
     following:[]
     
   }
+  const [allPosts,setAllPosts]=useState([])
+  const [myData,setMyData]=useState<myDetails>(Details)
+  const [followStat,setFollowStat]=useState(null)
+  
+
   const userId =useSelector((state:any)=>state.user.userId)
 
-  const [myData,setMyData]=useState<myDetails>(Details)
-  const [followStat,setFollowStat]=useState(boolean)
 
 
 
@@ -74,8 +74,7 @@ const MyProfile=()=> {
       }
 
 
-     const followStatus= await myProfile.following.includes(id)
-     console.log(details,followStat,'followstat');
+     const followStatus= await myProfile.followers.includes(userId)
      
      setFollowStat(followStatus)
       setMyData(details)
@@ -87,7 +86,7 @@ const MyProfile=()=> {
     <div >
       
         <NavbarHeader />
-        <TopCard myData={myData} allPosts={allPosts} followStat={followStat}/>
+        <TopCard myData={myData} allPosts={allPosts} followStat={followStat} setFollowStat={setFollowStat}/>
         <BottomCard allPosts={allPosts}/>
     </div>
   )

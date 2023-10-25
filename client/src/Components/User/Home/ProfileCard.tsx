@@ -4,8 +4,9 @@ import {
   CardFooter,
   Typography,
   Avatar,
+  Button,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateNewPost from "./Create";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const follow = {
 
 const ProfileCard = ({ myData }: { myData: myDetails }) => {
 
-
+const navigate=useNavigate()
  
   
   const [followList, setFollowList] = useState([follow])
@@ -147,8 +148,8 @@ const ProfileCard = ({ myData }: { myData: myDetails }) => {
         </CardBody>
         <CardFooter className="pt-0">
 
-          <Link to={"/myProfile"} className="text-purple-600">View full Profile
-          </Link>
+          <Typography onClick={()=>{navigate(`/myProfile/${userId}`)}} className="text-purple-600 cursor-pointer">View full Profile
+          </Typography>
         </CardFooter>
       </Card>
       <div className="w-[20rem]">

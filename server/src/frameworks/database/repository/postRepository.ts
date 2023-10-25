@@ -140,12 +140,19 @@ export const postRepository =()=>{
         
     }
 
+    const deleteThisComment=async(commentId:string)=>{
+      const response=await Comment.deleteOne({_id:commentId})
+      return response
+      
+    }
+
     return{
         addUserPost,
         allUserPost,
         likeFunction,
         commentFunction,
-        getAllComments
+        getAllComments,
+        deleteThisComment
     }
 }
 

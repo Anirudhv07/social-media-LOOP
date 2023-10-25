@@ -14,13 +14,13 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { setToken, setUserName,setUserId ,setProfilePic, setFirstName, setLastName} from "../../../redux/userRedux/slice";
+import { setToken, setUserName,setUserId ,setProfilePic, setFirstName, setLastName, setUserEmail, setUserBio} from "../../../redux/userRedux/slice";
 import { toast } from "react-toastify";
 
 interface response {
   status?: string,
   message?: string,
-  user?: { userName: string,firstName:string,lastName:string,_id: string, profilePic: string }
+  user?: { userName: string,firstName:string,lastName:string,_id: string, profilePic: string ,bio:string,email:string}
   token?: string,
 }
 
@@ -57,6 +57,8 @@ function UserLogin() {
           dispatch(setUserName(response?.user?.userName))
           dispatch(setUserId(response?.user?._id))
           dispatch(setProfilePic(response?.user?.profilePic))
+          dispatch(setUserBio(response?.user?.bio))
+          dispatch(setUserEmail(response?.user?.email))
         }
         navigate('/')
         toast.success(response?.message)
@@ -80,10 +82,14 @@ function UserLogin() {
       console.log(isEmailExist, 'email');
 
       if (isEmailExist?.status === "success") {
+
         if (isEmailExist?.token) {
          
           dispatch(setToken(isEmailExist?.token))
           dispatch(setUserName(isEmailExist?.user?.userName))
+          dispatch(setUserBio(isEmailExist?.user?.bio))
+          dispatch(setUserEmail(isEmailExist?.user?.email))
+
           dispatch(setUserId(isEmailExist?.user?._id))
           dispatch(setProfilePic(isEmailExist?.user?.profilePic))
         }
@@ -105,6 +111,8 @@ function UserLogin() {
             dispatch(setUserName(signUpUser?.user?.userName))
           dispatch(setUserId(signUpUser?.user?._id))
           dispatch(setProfilePic(signUpUser?.user?.profilePic))
+          dispatch(setUserBio(signUpUser?.user?.bio))
+          dispatch(setUserEmail(signUpUser?.user?.email))
           }
           navigate("/")
           toast.success(signUpUser?.message)

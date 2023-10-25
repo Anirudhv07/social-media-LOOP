@@ -20,6 +20,9 @@ router.post('/addComment',controller.addComment)
 
 router.post('/getAllComments',controller.allComment)
 
+router.post('/deleteComment',controller.deleteComment)
+
+
 
 
     

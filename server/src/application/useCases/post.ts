@@ -22,3 +22,8 @@ export const getAllComment=async(postId:string,repository:ReturnType<postDBInter
 
     return await repository.allComments(postId)
 }
+
+export const deleteThisComment=async(commentId:string,repository:ReturnType<postDBInterface>)=>{
+
+    return await repository.deleteComment(commentId)
+}

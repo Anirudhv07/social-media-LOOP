@@ -50,11 +50,11 @@ function BottomCard({ allPosts }: { allPosts: [] }) {
                 {/* <TabsBody className="grid grid-cols-3 grid-rows-auto m-1 gap-1"> */}
 
                 <TabsBody style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px,1fr))', gridGap: '5px', gridAutoFlow: 'dense' }}>
-                    {allPosts.map((allPost: post) => {
+                    {allPosts.map((singlePost: post) => {
                         return (
 
-                            <TabPanel value='Images' className="p-0 w-full h-72 max-h-72">
-                                <SinglePost allPost={allPost}/>
+                            <TabPanel value='Images' className="p-0 w-full h-72 max-h-72" >
+                                <SinglePost singlePost={singlePost}/>
                             </TabPanel>
                         )
 
