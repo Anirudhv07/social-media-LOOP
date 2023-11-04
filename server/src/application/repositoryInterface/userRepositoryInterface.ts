@@ -41,6 +41,10 @@ export const userRepositoryInterface=(repository:ReturnType<userDBRepository>)=>
         return await repository.editUserProfile(userId,values)
     }
 
+    const findUser=async(userName:string)=>{
+        return await repository.searchUser(userName)
+    }
+
     return{
         getByUserId,
         changeProPic,
@@ -49,7 +53,8 @@ export const userRepositoryInterface=(repository:ReturnType<userDBRepository>)=>
         followingList,
         followerList,
         followersPost,
-        editProfile
+        editProfile,
+        findUser
     }
 
 }

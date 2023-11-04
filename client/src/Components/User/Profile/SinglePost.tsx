@@ -4,6 +4,7 @@ import CommentSection from '../Comments/CommentDialog'
 
 
 interface post{
+    [x: string]: any
     _id:string,
     createdAt:string
     description:string
@@ -19,17 +20,18 @@ function SinglePost({singlePost}:{singlePost:post}) {
 
 
 
+
   const handleOpen = async () => {
+  
     
     const response = await getAllComment(singlePost._id)
-
     setComments(response)
     setOpen(!open);
   }
     
   return (
     <div
-  className="w-full h-full relative overflow-hidden"
+  className="w-full h-full relative overflow-hidden cursor-pointer"
   style={{ width: '100%', height: '100%' }} onClick={handleOpen}
   onMouseOver={(e) => {
     const img = e.currentTarget.querySelector('img') as HTMLImageElement | null;
@@ -44,11 +46,12 @@ function SinglePost({singlePost}:{singlePost:post}) {
     }
   }}
 >
+  
 <CommentSection handleOpen={handleOpen} open={open} singlePost={singlePost} comments={comments} setComments={setComments} />
 
   <img
     className="w-full h-full object-cover"
-    src={process.env.POST_PIC_URL + singlePost.imgVideoURL}
+    src={process.env.POST_PIC_URL + singlePost.posts.imgVideoURL}
     alt="Posted Image"
     style={{
       transition: 'transform 0.2s',

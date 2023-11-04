@@ -16,7 +16,93 @@ export const postRepository =()=>{
     }
    
     const allUserPost=async(userId:string)=>{
-        return await Post.find({postedUser:userId}).sort({createdAt:-1})
+      const userID= new mongoose.Types.ObjectId(userId)
+
+        return await Post.aggregate([
+          {
+            $match:
+              /**
+               * query: The query in MQL.
+               */
+              {
+                postedUser: userId,
+              },
+          },
+          {
+            $addFields:
+              /**
+               * newField: The new field name.
+               * expression: The new field expression.
+               */
+              {
+                userId: {
+                  $toObjectId: "$postedUser",
+                },
+              },
+          },
+          {
+            $lookup:
+              /**
+               * from: The target collection.
+               * localField: The local join field.
+               * foreignField: The target join field.
+               * as: The name for the results.
+               * pipeline: Optional pipeline to run on the foreign collection.
+               * let: Optional variables to use in the pipeline field stages.
+               */
+              {
+                from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "userDetails",
+              },
+          },
+          {
+            $project:
+              /**
+               * specifications: The fields to
+               *   include or exclude.
+               */
+              {
+                posts: {
+                  postedUser: "$postedUser",
+                  imgVideoURL: "$imgVideoURL",
+                  description: "$description",
+                  like: "$like",
+                  report: "$report",
+                  createdAt: "$createdAt",
+                  updatedAt: "$updatedAt",
+                  _id: "$_id",
+                },
+                createdAt:1,
+                userDetails: 1,
+              },
+          },
+          {
+            $unwind:
+              /**
+               * path: Path to the array field.
+               * includeArrayIndex: Optional name for index.
+               * preserveNullAndEmptyArrays: Optional
+               *   toggle to unwind null and empty values.
+               */
+              {
+                path: "$userDetails",
+              },
+          },
+          {
+            $sort:
+              /**
+               * Provide any number of field/order pairs.
+               */
+              {
+                createdAt: -1,
+              },
+          },
+        ])
+
+        
+        
         
         
     }
@@ -60,7 +146,6 @@ export const postRepository =()=>{
           listed:true,
           createdAt:new Date()
         }
- console.log(replyComment,'replyyyy');
  
         const response=await Comment.updateOne({_id:replyCommentId},{$push:{reply:replyComment}})
         if(response){

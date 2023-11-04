@@ -48,3 +48,7 @@ export const editUserProfile=async(userId:string,values:{firstName:string,
     return await repository.editProfile(userId,values)
 }
 
+export const searchUser=async(userName:string,repository:ReturnType<userDBInterface>)=>{
+    return await repository.findUser(userName)
+}
+

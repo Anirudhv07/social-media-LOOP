@@ -24,6 +24,7 @@ interface post{
 
 function BottomCard({ allPosts }: { allPosts: [] }) {
 
+    
    
 
     return (

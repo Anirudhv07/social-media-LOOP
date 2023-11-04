@@ -378,6 +378,13 @@ export const userRepository=()=>{
         
       }
 
+
+    const searchUser=async(userName:string)=>{
+      const regex = new RegExp(userName,'i')
+      
+     return await User.find({$or:[{firstName:{$regex:regex}},{lastName:{$regex:regex}},{userName:{$regex:regex}}]},{firstName:1,lastName:1,profilePic:1}).limit(10)
+    }
+
 return{
     getUserByUserId,
     updateProPic,
@@ -386,7 +393,8 @@ return{
     myFollowingList,
     myFollowerList,
     myFollowersPost,
-    editUserProfile
+    editUserProfile,
+    searchUser
 }
 }
 export type   userDBRepository=typeof userRepository

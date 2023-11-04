@@ -120,3 +120,18 @@ export const editProfile=async(values:{},userId:string)=>{
         
     }
 }
+
+
+export const findUser=async(userName:string)=>{
+    try{
+        
+        
+        
+        const response=await apiURL.post('user/searchUser',{userName})
+        return response.data
+        
+    }catch(err:any){
+        console.log(err);
+        
+    }
+}

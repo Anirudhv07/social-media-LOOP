@@ -26,6 +26,9 @@ router.post('/followersPost',controller.followersPost)
 
 router.post('/editProfile',controller.editProfile)
 
+router.post('/searchUser',controller.findUser)
+
+
 
 
 

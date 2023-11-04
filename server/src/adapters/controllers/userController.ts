@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler"
 import { Request, Response } from "express"
 import { userDBInterface } from "../../application/repositoryInterface/userRepositoryInterface"
 import { userDBRepository } from "../../frameworks/database/repository/userRepository"
-import { myProfie,updateProfilePic,allUsers,followUnfollowUser,myFollowingList,myFollowerList,myFollowersPost, editUserProfile } from "../../application/useCases/user"
+import { myProfie,updateProfilePic,allUsers,followUnfollowUser,myFollowingList,myFollowerList,myFollowersPost, editUserProfile, searchUser } from "../../application/useCases/user"
 
 const userController=(
     userRepository:userDBRepository,
@@ -88,6 +88,14 @@ const userController=(
         res.json(response)
         
     }
+
+    const findUser=async(req:Request,res:Response)=>{
+        const userName=req.body.userName
+        
+        const response=await searchUser(userName,repository)
+        res.json(response)
+        
+    }
  
 return{
     myProfileDetails,
@@ -97,8 +105,8 @@ return{
     followingList,
     followerList,
     followersPost,
-    editProfile
-  
+    editProfile ,
+    findUser
 }
 }
 

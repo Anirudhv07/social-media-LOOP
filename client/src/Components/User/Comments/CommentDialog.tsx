@@ -27,10 +27,8 @@ interface Dialog {
     setComments:any
 }
 const CommentSection: React.FC<Dialog> = ({ handleOpen, open, singlePost,comments,setComments }) => {
-
-
-    console.log(comments,'commentsssss');
-    
+  console.log(singlePost,'jj');
+  
     
     const textAreaRef=useRef<HTMLInputElement | null>(null)
 
