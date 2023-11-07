@@ -16,6 +16,7 @@ interface myDetails {
   userName: string,
   firstName: string,
   lastName: string,
+  bio:string,
   followers: [],
   following: []
 
@@ -32,6 +33,7 @@ const Home = () => {
     userName: '',
     firstName: '',
     lastName: '',
+    bio:'',
     followers: [],
     following: []
   }
@@ -55,6 +57,8 @@ const Home = () => {
 
   const myDetails = async () => {
     const myProfile = await getMyProfile(userId as string)
+    console.log(myProfile,'proooo');
+    
     if (myProfile) {
       const details = {
         email: myProfile.email,
@@ -63,6 +67,7 @@ const Home = () => {
         userName: myProfile.userName,
         firstName: myProfile.firstName,
         lastName: myProfile.lastName,
+        bio:myProfile.bio,
         followers: myProfile.followers,
         following: myProfile.following
       }

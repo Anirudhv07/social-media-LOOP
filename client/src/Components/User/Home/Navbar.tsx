@@ -122,7 +122,10 @@ function NavbarHeader() {
           href="#"
           className="mr-4 cursor-pointer font-medium"
         >
+          <Link to={"/"}>
+
           <img src="/icons/logoBlackNew.png" style={{width:"80px"}} alt="" />
+          </Link>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div className="flex flex-row gap-5">

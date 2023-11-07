@@ -75,7 +75,7 @@ import { Link } from "react-router-dom";
               My Profile
             </Typography>
           </MenuItem>
-          <MenuItem className="flex items-center gap-2">
+          {/* <MenuItem className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -98,7 +98,7 @@ import { Link } from "react-router-dom";
             <Typography variant="small" className="font-normal">
               Edit Profile
             </Typography>
-          </MenuItem>
+          </MenuItem> */}
          
           
           <hr className="my-2 border-blue-gray-50" />

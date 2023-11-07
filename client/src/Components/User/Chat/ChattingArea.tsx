@@ -15,7 +15,7 @@ function ChattingArea() {
         <hr className="my-2 border-blue-gray-100" />
 
         <div className='h-96'>
-            <Messages />
+            {/* <Messages /> */}
         </div>
         <div>
         <div >

@@ -21,6 +21,7 @@ interface myDetails {
   userName: string,
   firstName: string,
   lastName: string,
+  bio:string,
   followers: [],
   following: []
 }
@@ -117,7 +118,7 @@ const navigate=useNavigate()
             fontFamily: "monospace",
             color: 'transparent',
           }}  >
-            Explore the world
+            {myData.bio}
           </Typography>
           <hr className="mt-5" style={hrStyle} />
 

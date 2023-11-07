@@ -12,6 +12,7 @@ import dotenv from 'dotenv'
 import { useSelector } from "react-redux";
 import EditProfile from "./EditProfileDialog";
 import { followUnfollowUser } from "../../../api/apiConnection/homeConnection";
+import ChatBox from "../Chat/ChatDialog";
 
 
 
@@ -158,11 +159,11 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat,setFollowStat})=>
         </div >
         <div className="mt-5" >
 
-          {myData.userId === userId ?<Button onClick={handleOpenEditProfle}>Edit Profile</Button>:(followStat===true?(<Button onClick={()=>followUnfollow(myData.userId)}>Unfollow</Button>):(<Button onClick={()=>followUnfollow(myData.userId)}>Follow</Button>))}
+          {myData.userId === userId ?<Button onClick={handleOpenEditProfle}>Edit Profile</Button>:(followStat===true?(<div><Button onClick={() => followUnfollow(myData.userId)}>Unfollow</Button>  <Button onClick={handleOpen}>Message</Button></div>):(<Button onClick={()=>followUnfollow(myData.userId)}>Follow</Button>))}
           <EditProfile handleOpenEditProfle={handleOpenEditProfle} openEditProfile={openEditProfile} myData={myData}/>
 </div>
         
-          
+<ChatBox handleOpen={handleOpen} open={open}/>
       
 
       </CardBody>
