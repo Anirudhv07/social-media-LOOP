@@ -4,6 +4,7 @@ import {
   TabsBody,
   Tab,
   TabPanel,
+  Typography,
 } from "@material-tailwind/react";
 
 import PostCard from "./Post";
@@ -38,8 +39,7 @@ function TabSlide({ post }: { post: any }) {
 
         <TabsBody >
 
-
-            {post.map((singlePost: any) => (
+            {post.length===0?<Typography className="text-center italic mt-10" color="purple" >Follow user to see their POST</Typography>:post.map((singlePost: any) => (
           <TabPanel value='Images' className=" w-full h-full my-3">
 
               <PostCard singlePost={singlePost} />
@@ -49,6 +49,7 @@ function TabSlide({ post }: { post: any }) {
           </TabPanel>
             )
             )}
+          
 
         </TabsBody>
 

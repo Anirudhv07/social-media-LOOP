@@ -15,6 +15,7 @@ interface myDetails{
   userName:string,
   firstName:string,
   lastName:string,
+  bio:string,
   followers:[],
   following:[]
   
@@ -29,6 +30,7 @@ const MyProfile=()=> {
     profilePic:'',
     userName:'',
     firstName:'',
+    bio:'',
     lastName:'',
     followers:[],
     following:[]
@@ -65,6 +67,7 @@ const MyProfile=()=> {
         userId:myProfile._id,
         email:myProfile.email,
         phone:myProfile.phone,
+        bio:myProfile.bio,
         profilePic:myProfile.profilePic,
         userName:myProfile.userName,
         firstName:myProfile.firstName,

@@ -24,6 +24,7 @@ interface myDetails {
   profilePic: string,
   userName: string,
   firstName: string,
+  bio:string,
   lastName: string,
   followers: [],
   following: []
@@ -72,13 +73,20 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat,setFollowStat})=>
       </CardHeader>
       <CardBody className="relative py-14 px-6 md:px-12 ">
         {myData.userId === userId ? <div className="relative flex flex-auto justify-center group cursor-pointer " onClick={handleOpen}>
-          <Avatar
+          {userProPic?  <Avatar
             style={{ width: '130px', height: '130px' }}
             variant="circular"
             alt="tania andrew"
             className="border-2 border-white relative transition-transform hover:filter-darken"
             src={process.env.PROFILE_PIC_URL + userProPic}
-          />
+          />: <Avatar
+          style={{ width: '130px', height: '130px' }}
+          variant="circular"
+          alt="tania andrew"
+          className="border-2 border-white relative transition-transform hover:filter-darken"
+          src='/defaultAvatar.png'
+        />}
+        
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -118,15 +126,15 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat,setFollowStat})=>
         <DialogBox handleOpen={handleOpen} open={open} />
 
         <Typography variant="h5" className="mt-4 text-white">
-          {firstName} &nbsp;
-          {lastName}
+          {myData.firstName} &nbsp;
+          {myData.lastName}
         </Typography>
-        <p>{userName}</p>
+        <p>{myData.userName}</p>
         <Typography className="font-sans py-5  text-white" style={{
           fontFamily: "monospace",
         }}  >
           <span>--  </span>
-          {bio}
+          {myData.bio}
           <span>  --</span>
 
         </Typography>
@@ -159,11 +167,11 @@ const TopCard:React.FC<topCard>=({ myData ,allPosts,followStat,setFollowStat})=>
         </div >
         <div className="mt-5" >
 
-          {myData.userId === userId ?<Button onClick={handleOpenEditProfle}>Edit Profile</Button>:(followStat===true?(<div><Button onClick={() => followUnfollow(myData.userId)}>Unfollow</Button>  <Button onClick={handleOpen}>Message</Button></div>):(<Button onClick={()=>followUnfollow(myData.userId)}>Follow</Button>))}
+          {myData.userId === userId ?<Button onClick={handleOpenEditProfle}>Edit Profile</Button>:(followStat===true?(<div><Button onClick={() => followUnfollow(myData.userId)}>Unfollow</Button>  <Button >Message</Button></div>):(<Button onClick={()=>followUnfollow(myData.userId)}>Follow</Button>))}
           <EditProfile handleOpenEditProfle={handleOpenEditProfle} openEditProfile={openEditProfile} myData={myData}/>
 </div>
         
-<ChatBox handleOpen={handleOpen} open={open}/>
+{/* <ChatBox handleOpen={handleOpen} open={open}/> */}
       
 
       </CardBody>

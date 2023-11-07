@@ -93,13 +93,22 @@ const navigate=useNavigate()
 
       <Card className="mt-6 w-[20rem] flex flex-col items-center justify-between">
         <CardBody className="flex flex-col items-center justify-center text-center">
-          <Avatar
-            style={{ width: '150px', height: '150px' }} // Adjust the width and height as needed
+        
+            {myData.profilePic?  <Avatar
+                     style={{ width: '150px', height: '150px' }} // Adjust the width and height as needed
+
             variant="circular"
             alt="tania andrew"
-            className="border-2 border-white"
-            src={process.env.PROFILE_PIC_URL+myData.profilePic}
-          />
+            className="border-2 border-white relative transition-transform hover:filter-darken"
+            src={process.env.PROFILE_PIC_URL + myData.profilePic}
+          />: <Avatar
+          style={{ width: '150px', height: '150px' }} // Adjust the width and height as needed
+
+          variant="circular"
+          alt="tania andrew"
+          className="border-2 border-white relative transition-transform hover:filter-darken"
+          src='/defaultAvatar.png'
+        />}
 
           <div >
 

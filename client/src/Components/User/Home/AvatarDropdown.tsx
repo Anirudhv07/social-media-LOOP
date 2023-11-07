@@ -39,13 +39,19 @@ import { Link } from "react-router-dom";
           color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
         >
-          <Avatar
+           {userProPic?  <Avatar
+          size="sm"
             variant="circular"
-            size="sm"
             alt="tania andrew"
-            className="border border-gray-900 p-0.5"
-            src={process.env.PROFILE_PIC_URL+userProPic}
-          />
+            className="border-2 border-white relative transition-transform hover:filter-darken"
+            src={process.env.PROFILE_PIC_URL + userProPic}
+          />: <Avatar
+          size="sm"
+          variant="circular"
+          alt="tania andrew"
+          className="border-2 border-white relative transition-transform hover:filter-darken"
+          src='/defaultAvatar.png'
+        />}
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 transition-transform ${

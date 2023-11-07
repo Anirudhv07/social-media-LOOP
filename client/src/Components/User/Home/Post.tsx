@@ -19,6 +19,7 @@ import { boolean } from "yup";
 import moment from "moment";
 import {  EllipsisVerticalIcon, TrashIcon,FlagIcon } from "@heroicons/react/24/solid";
 import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -46,6 +47,7 @@ function PostCard({ singlePost }: { singlePost: any }) {
     getCommentCount()
   })
 
+  const navigate=useNavigate()
 
   const getCommentCount=async()=>{
     const singlePostId = singlePost?.posts?._id
@@ -86,7 +88,7 @@ function PostCard({ singlePost }: { singlePost: any }) {
 
       <div>
         <div className="justify-between flex flex-row">
-          <div className="flex flex-row gap-4 pl-5 items-center">
+          <div className="flex flex-row gap-4 pl-5 items-center cursor-pointer" onClick={()=> navigate(`/myProfile/${singlePost?.userDetails?._id}`)}>
 
             <Avatar src={process.env.PROFILE_PIC_URL + singlePost?.userDetails?.profilePic} alt="avatar" />
             <Typography color="blue-gray" className="font-semibold">
