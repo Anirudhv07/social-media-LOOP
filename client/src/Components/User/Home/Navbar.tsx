@@ -19,13 +19,24 @@ import ChatBox from "../Chat/ChatDialog";
 import { findUser } from "../../../api/apiConnection/homeConnection";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import UserSearchList from "./UserSearchList";
+import { useSelector } from "react-redux";
+import { getAllChat } from "../../../api/apiConnection/chatConnection";
 function NavbarHeader() {
 
   const [open, setOpen] = React.useState(false);
   const [searchText,setSearchText]= useState('')
- 
+ const [chatList,setChatList]=useState([])
   const [searchedUserList,setSearchedUserList]=useState([])
-  const handleOpen = () => setOpen(!open);
+
+  const {userId}=useSelector((store:any)=>store.user)
+  const handleOpen = async() =>{
+
+    const response=await getAllChat(userId)
+setChatList(response)
+    setOpen(!open);
+
+  } 
+    
   const [openNav, setOpenNav] = React.useState(false);
 
   const searchUser=async(event:any)=>{
@@ -144,7 +155,7 @@ function NavbarHeader() {
 </svg>
 
           </Button>
-          <ChatBox handleOpen={handleOpen} open={open}/>
+          <ChatBox handleOpen={handleOpen} open={open} chatList={chatList} setChatList={setChatList}/>
           </div>
           <AvatarDropdown />
         </div>

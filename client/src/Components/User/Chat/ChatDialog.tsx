@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -11,36 +11,52 @@ import { boolean } from "yup";
 import ChattedUser from "./ChattedUser";
 import ChattingArea from "./ChattingArea";
 import { XMarkIcon } from "@heroicons/react/24/solid";
- 
-interface dialog{
-    handleOpen:()=>void,
-    open:boolean
+
+
+interface dialog {
+  handleOpen: () => void,
+  open: boolean,
+  chatList:any,
+  setChatList:any
 }
-const ChatBox:React.FC<dialog>=({handleOpen,open})=> {
+const ChatBox: React.FC<dialog> = ({ handleOpen, open, chatList , setChatList }) => {
+
+  // const [searchUser, setSearchUser] = useState({
+  //   firstName :"", 
+  //   lastName:"",
+  //   profilePic:"",
+  //   _id:''
+  // });
+
+  const [selectedUser,setSelectedUser]=useState(null)
+
   
- 
+
+
+
   return (
     <>
-      
+
       <Dialog open={open} size="xl" handler={handleOpen}>
-        
+
         <DialogBody>
-         <div className="flex flex-row">
+          <div className="flex flex-row gap-4" >
             <div className="w-1/3">
-            <Typography variant="h4" color="blue-gray">
-              Messages
-            </Typography>
-                <ChattedUser />
-                
+              <Typography variant="h4" color="blue-gray">
+                Messages
+              </Typography>
+
+              <ChattedUser  setSelectedUser={setSelectedUser} chatList={chatList} setChatList={setChatList}/>
+
 
             </div>
             <div className="w-2/3">
-                    <ChattingArea />
+              <ChattingArea selectedUser={selectedUser}/>
             </div>
             <div className="h-6 w-6 m-2 cursor-pointer" onClick={handleOpen}>
-                                <XMarkIcon color="black" />
-                            </div>
-         </div>
+              <XMarkIcon color="black" />
+            </div>
+          </div>
         </DialogBody>
         <DialogFooter>
           <Button
